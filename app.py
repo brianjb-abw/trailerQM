@@ -1,3 +1,4 @@
+import csv
 from pathlib import Path
 
 from handlers.AR import proc_AR
@@ -16,6 +17,9 @@ HANDLERS = {
 def main():
     t_in = Path('T_IN')
     csv_path = str(Path('T_OUT') / 'trailer_data.csv')
+
+    with open(csv_path, 'w', newline='') as f:
+        csv.writer(f).writerow(['VIN', 'W', 'L', 'Description', 'Color', 'Cost'])
 
     for pdf_file in sorted(t_in.glob('*.pdf')):
         prefix = pdf_file.stem[:2].upper()
